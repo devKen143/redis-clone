@@ -1,0 +1,20 @@
+[package]
+name = "redis-clone"
+version = "0.1.0"
+edition = "2021"
+description = "A Redis-compatible in-memory data store: RESP protocol, 60+ commands, expiry, pub/sub, transactions, AOF"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "redis-clone"
+path = "src/main.rs"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+tokio = { version = "1", features = ["full"] }
+
+[profile.release]
+opt-level = "s"
+lto = true
